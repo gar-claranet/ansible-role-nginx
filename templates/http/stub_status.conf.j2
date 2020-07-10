@@ -1,0 +1,18 @@
+server {
+    listen {{ nginx_status_listen | default('127.0.0.1') }}:{{ nginx_status_port | default('80') }};
+{% if nginx_type == 'plus' %}
+    location /{{ nginx_status_path | default('status') }} {
+        status on;
+{% else %}
+    location /{{ nginx_status_path | default('nginx_status') }} {
+        stub_status on;
+{% endif %}
+        access_log {{ nginx_status_log | ternary("on", "off") }};
+{% for allow in item.value.nginx_status_allows %}
+        allow {{ allow }};
+{% endfor %}
+{% for deny in item.value.nginx_status_denies %}
+        deny {{ deny }};
+{% endfor %}
+    }
+}

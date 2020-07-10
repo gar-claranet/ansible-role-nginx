@@ -317,8 +317,14 @@ nginx_http_template:
 # Default is false.
 nginx_status_enable: false
 nginx_status_location: /etc/nginx/conf.d/stub_status.conf
+nginx_status_listen: 127.0.0.1
 nginx_status_port: 80
+nginx_status_path: "nginx_status"
 nginx_status_log: false
+nginx_status_allows:
+  - 127.0.0.1
+nginx_status_denies:
+  - all
 
 # Enable NGINX Plus REST API, write access to the REST API, and NGINX Plus dashboard.
 # Requires NGINX Plus.
