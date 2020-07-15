@@ -1,5 +1,8 @@
 server {
-    listen {{ nginx_status_listen | default('127.0.0.1') }}:{{ nginx_status_port | default('80') }};
+    listen {{ nginx_status_listen | default('127.0.0.1') }}:{{ nginx_status_port }};
+{% if nginx_status_server_name %}
+    server_name {{ nginx_status_server_name }};
+{% endif %}
 {% if nginx_type == 'plus' %}
     location /{{ nginx_status_path | default('status') }} {
         status on;
