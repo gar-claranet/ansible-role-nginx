@@ -1,7 +1,11 @@
 server {
+{% if nginx_status_default_server %}
+    listen {{ nginx_status_listen | default('127.0.0.1') }}:{{ nginx_status_port }} default_server;
+{% else %}
     listen {{ nginx_status_listen | default('127.0.0.1') }}:{{ nginx_status_port }};
+{% endif %}
 {% if nginx_status_server_name %}
-    server_name {{ nginx_status_server_name }} default_server;
+    server_name {{ nginx_status_server_name }};
 {% endif %}
 {% if nginx_type == 'plus' %}
     location /{{ nginx_status_path | default('status') }} {
