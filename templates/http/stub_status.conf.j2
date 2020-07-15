@@ -8,11 +8,11 @@ server {
         stub_status on;
 {% endif %}
         access_log {{ nginx_status_log | ternary("on", "off") }};
-{% for allow in item.value.nginx_status_allows %}
-        allow {{ allow }};
+{% for item in nginx_status_allows %}
+        allow {{ item }};
 {% endfor %}
-{% for deny in item.value.nginx_status_denies %}
-        deny {{ deny }};
+{% for item in nginx_status_denies %}
+        deny {{ item }};
 {% endfor %}
     }
 }
