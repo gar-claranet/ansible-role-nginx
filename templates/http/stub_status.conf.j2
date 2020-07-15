@@ -1,10 +1,10 @@
 server {
-{% if nginx_status_default_server %}
+{% if nginx_status_default_server is defined %}
     listen {{ nginx_status_listen | default('127.0.0.1') }}:{{ nginx_status_port }} default_server;
 {% else %}
     listen {{ nginx_status_listen | default('127.0.0.1') }}:{{ nginx_status_port }};
 {% endif %}
-{% if nginx_status_server_name %}
+{% if nginx_status_server_name is defined %}
     server_name {{ nginx_status_server_name }};
 {% endif %}
 {% if nginx_type == 'plus' %}
